@@ -48,6 +48,4 @@ payload = {
     "wind_speed_peak_mph": value(metar_data.wind_speed_peak, "MPH"),
 }
 
-print(payload)
-
-#publish.single("metar", json.dumps(payload), hostname="mqtt.example.com")
+publish.single(f"metar/observation/{metar_data.station_id}", json.dumps(payload), hostname="sodium")
