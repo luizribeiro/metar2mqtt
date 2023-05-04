@@ -1,6 +1,6 @@
 import ftplib
 import json
-from datetime import datetime
+import datetime
 from io import BytesIO
 
 from paho.mqtt import publish
@@ -21,8 +21,13 @@ with ftplib.FTP(FTP_SERVER) as ftp:
 def value(x, unit):
     return x.value(unit) if x else None
 
+
+# metar dates are given in UTC
+utc_tz = datetime.timezone.utc
+date = metar_data.time.replace(tzinfo=utc_tz)
+
 payload = {
-    "timestamp": int(datetime.timestamp(metar_data.time)),
+    "timestamp": int(date.timestamp()),
     "station": metar_data.station_id,
     "cycle": metar_data.cycle,
     "dewpoint": value(metar_data.dewpt, "C"),
