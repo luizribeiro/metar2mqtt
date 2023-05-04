@@ -6,8 +6,9 @@ from io import BytesIO
 from paho.mqtt import publish
 from metar import Metar
 
+STATION = "KEWR"
 FTP_SERVER = "tgftp.nws.noaa.gov"
-FTP_PATH = "/data/observations/metar/stations/KEWR.TXT"
+FTP_PATH = f"/data/observations/metar/stations/{STATION}.TXT"
 
 with ftplib.FTP(FTP_SERVER) as ftp:
     ftp.login()
