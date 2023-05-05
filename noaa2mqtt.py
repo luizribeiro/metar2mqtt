@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import ftplib
 import json
 import datetime
